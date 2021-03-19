@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
-import Header from "./Header/Header";
 import Header2 from "./Header/Header2";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./Header/Theme";

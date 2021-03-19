@@ -184,9 +184,9 @@ export default function Header(props) {
     //   ariaPopup: anchorEl ? "true" : undefined,
     //   mouseOver: (event) => handleClick(event),
     // },
-    { name: "My ovens", link: "/my-ovens", activeIndex: 2 },
-    { name: "Exchange", link: "/exchange", activeIndex: 3 },
-    { name: "Create an oven", link: "/create-an-oven", activeIndex: 4 },
+    { name: "My ovens", link: "/my-ovens", activeIndex: 1 },
+    { name: "Exchange", link: "/exchange", activeIndex: 2 },
+    { name: "Create an oven", link: "/create-an-oven", activeIndex: 3 },
     //{ name: "Contact Us", link: "/contact", activeIndex: 4 },
   ];
 
