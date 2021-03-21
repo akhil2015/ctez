@@ -11,4 +11,4 @@ function Swap() {
     )
 }
 
-export default Swap
+export default Swap;
