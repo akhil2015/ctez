@@ -16,15 +16,65 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 
 //CSS
-import styles from "./styles.css";
+import "./styles.css";
 
 //For header
 import Header2 from "../components/Header/Header2";
 import theme from "../components/Header/Theme";
+import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  underline: {
+    "&&&:before": {
+      borderBottom: "none",
+    },
+    "&&:after": {
+      borderBottom: "none",
+    },
+  },
   root: {
     flexGrow: 1,
+    backgroundImage: "linear-gradient(to right, #396afc, #2948ff)",
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    top: "0px",
+    right: "0px",
+    bottom: "0px",
+    left: "0px",
+    overflow: "hidden",
+    minHeight: "100vh",
+  },
+  glassColour1: {
+    filter: "blur(200px)",
+    position: "absolute",
+    top: "-350px",
+    width: "600px",
+    height: "600px",
+    background: "#ff359b",
+    //zIndex: "-1",
+  },
+  glassColour2: {
+    filter: "blur(150px)",
+    position: "absolute",
+    bottom: "-150px",
+    left: "200px",
+    right: "800px",
+    height: "500px",
+    width: "500px",
+    background: "#92FE9D",
+    //zIndex: "-1",
+  },
+  glassColour3: {
+    filter: "blur(150px)",
+    position: "absolute",
+    bottom: "50px",
+    right: "500px",
+    left: "500px",
+    width: "500px",
+    height: "400px",
+    background: "#00C9FF",
   },
   gridAlign: {
     //padding: theme.spacing(2),
@@ -40,11 +90,27 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {},
   glass: {
-    background: "rgba(207, 209, 217, 0.35)",
-    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-    backdropFilter: "blur(0.0px)",
-    WebkitBackdropFilter: "blur(0.0px)",
+    background: "rgba(255, 255, 255, 0.1)",
     borderRadius: "10px",
+    backdropFilter: "blur(5px)",
+    boxShadow: "0 25px 45px rgba(0,0,0, 0.1)",
+    border: "1px solid rgba(255, 255, 255, 0.5)",
+    borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+  },
+  formTitle: {
+    position: "relative",
+    color: "#fff",
+    fontSize: "30px",
+    fontWeight: "700",
+    letterSpacing: "1px",
+    marginBottom: "20px",
+  },
+  formIPTitle: {
+    fontSize: "20px",
+    fontWeight: "500",
+    letterSpacing: "1px",
+    marginBottom: "20px",
   },
 }));
 
@@ -75,76 +141,147 @@ export default function CreateAnOven() {
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
       />
+
       <div className={classes.root}>
-        <div style={{ display: "grid", placeItems: "center", height: "65vh" }}>
-          <div className={classes.glass} style={{ padding: "20px" }}>
-            <FormControl
-              className={classes.formControl}
-              fullWidth
-              style={{ marginLeft: "-1.5px" }}
+        <div className={classes.glassColour1}></div>
+        <div className={classes.glassColour2}></div>
+        <div className={classes.glassColour3}></div>
+        <div
+          style={{
+            display: "grid",
+            placeItems: "center",
+            height: "90vh",
+            padding: "15%",
+            marginTop: "7vh",
+          }}
+        >
+          <div className={classes.glass} style={{ padding: "40px" }}>
+            <div className='box'>
+              <div className='square'></div>
+              <div className='square'></div>
+              <div className='square'></div>
+            </div>
+            <h2 className={classes.formTitle} style={{ marginTop: "-10px" }}>
+              Create an oven
+            </h2>
+            <text
+              className={classes.formIPTitle}
+              style={{
+                color: "#fff",
+                float: "left",
+                marginLeft: "4%",
+                //marginBottom: "12px",
+                marginBottom: "3px",
+              }}
             >
-              <InputLabel htmlFor='age-native-simple'>Delegate</InputLabel>
+              Delegate
+            </text>
+            <FormControl
+              fullWidth
+              //variant='filled'
+              className={classes.formControl}
+              disableUnderline={true}
+              style={{
+                width: "90%",
+                background: "rgba(255, 255, 255, 0.2)",
+                border: "none",
+                outline: "none",
+                padding: "7px 15px",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                fontSize: "16px",
+                color: "#000",
+                boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+              }}
+            >
               <Select
-                native
-                value={state.age}
+                disableUnderline={true}
+                labelId='demo-simple-select-filled-label'
+                id='demo-simple-select-filled'
+                //value={age}
                 onChange={handleChange}
-                inputProps={{
-                  name: "age",
-                  id: "age-native-simple",
+                style={{
+                  background: "rgba(255, 255, 255, 0.0)",
+                  color: "#fff",
                 }}
+                placeholder='Delegate'
               >
-                <option aria-label='None' value='' />
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-
-            <FormControl component='fieldset' style={{}} fullWidth>
-              <FormLabel
-                component='legend'
-                labelPlacement='start'
-                style={{ marginLeft: "-30px" }}
-              >
-                Who can deposit?
-              </FormLabel>
-              <RadioGroup
-                aria-label='deposit'
-                name='deposit'
-                value={state.gender}
-                onChange={handleChange}
-              >
-                <FormControlLabel
-                  value='Whitelist'
-                  control={<Radio />}
-                  label='Whitelist'
-                />
-                <FormControlLabel
-                  value='Everyone'
-                  control={<Radio />}
-                  label='Everyone'
-                />
-              </RadioGroup>
-            </FormControl>
+            <text
+              className={classes.formIPTitle}
+              style={{
+                color: "#fff",
+                float: "left",
+                marginLeft: "4%",
+                marginBottom: "12px",
+              }}
+            >
+              Initial deposit (in XTZ)
+            </text>
             <TextField
-              style={{ marginTop: "10px" }}
               fullWidth
-              id='outlined-number'
-              label='Initial deposit(in XTZ)'
+              disableUnderline={true}
+              id='standard-number'
+              //label='Number'
               type='number'
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleChange}
-              variant='outlined'
+              InputProps={{ disableUnderline: true }}
+              style={{
+                width: "90%",
+                background: "rgba(255, 255, 255, 0.2)",
+                border: "none",
+                outline: "none",
+                padding: "7px 15px",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                fontSize: "16px",
+                color: "#000",
+                boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+                textDecoration: "none",
+              }}
             />
+            <text
+              className={classes.formIPTitle}
+              style={{
+                color: "#fff",
+                float: "left",
+                marginLeft: "4%",
+                marginBottom: "12px",
+              }}
+            >
+              Authorized depositors
+            </text>
             <TextField
-              style={{ marginTop: "10px" }}
-              fullWidth
-              id='outlined-search'
-              label='Search field'
-              type='search'
-              variant='outlined'
+              required
+              InputProps={{ disableUnderline: true }}
+              id='standard-required'
+              //label='Required'
+              defaultValue=''
+              style={{
+                width: "90%",
+                background: "rgba(255, 255, 255, 0.2)",
+                border: "none",
+                outline: "none",
+                padding: "7px 15px",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                fontSize: "16px",
+                color: "#000",
+                boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+                textDecoration: "none",
+              }}
             />
           </div>
         </div>
