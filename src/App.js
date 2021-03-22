@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./App.css";
 import Swap from "./components/ExchangeForm";
+//import Swap from "./components/Forms/E";
 import CreateAnOven from "./pages/CreateAnOven";
 // import UserOvens from "./components/Ovens/UserOvens"
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className='App'>
       <Router>
         <Route exact path='/' component={Swap} />
+        <Route exact path='/exchange' component={Swap} />
         <Route exact path='/create' component={CreateAnOven} />
         {/* <Route exact path='/my-ovens' component={userOvens} /> */}
       </Router>

@@ -143,16 +143,14 @@ export default function CreateAnOven() {
       />
 
       <div className={classes.root}>
-        <div className={classes.glassColour1}></div>
-        <div className={classes.glassColour2}></div>
-        <div className={classes.glassColour3}></div>
         <div
           style={{
             display: "grid",
             placeItems: "center",
-            height: "90vh",
+            height: "110vh",
             padding: "15%",
             marginTop: "7vh",
+            width: "80%",
           }}
         >
           <div className={classes.glass} style={{ padding: "40px" }}>
