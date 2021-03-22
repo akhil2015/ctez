@@ -20,8 +20,8 @@ import "./styles.css";
 
 //For header
 import Header2 from "../components/Header/Header2";
-import theme from "../components/Header/Theme";
-import { MenuItem } from "@material-ui/core";
+import theme from "../Theme";
+// import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   underline: {
@@ -208,9 +208,10 @@ export default function CreateAnOven() {
                 }}
                 placeholder='Delegate'
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <option aria-label='None' value='' />
+                <option value={10}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
+                <option value={20}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
+                <option value={30}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
               </Select>
             </FormControl>
             <text
