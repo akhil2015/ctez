@@ -1,0 +1,29 @@
+<div className='box' style={{ marginTop: "0px" }}>
+            <div className='square' style={{ style: "--i:0;" }}></div>
+            <div className='square'></div>
+            <div className='square'></div>
+            <div className='square'></div>
+            <div className='square'></div>
+            <div className='container'>
+              <div className='form'>
+                <h2>Login Form</h2>
+                <form>
+                  <div className='inputBox'>
+                    <input type='text' placeholder='Username' />
+                  </div>
+                  <div className='inputBox'>
+                    <input type='password' placeholder='Password' />
+                  </div>
+                  <div className='inputBox'>
+                    <input type='submit' value='Login' />
+                  </div>
+                  <p className='forget'>
+                    Forgot Password? <a href='#'>Click Here</a>
+                  </p>
+                  <p className='forget'>
+                    Don't have an account? <a href='#'>Sign Up</a>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
