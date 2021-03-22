@@ -20,7 +20,7 @@ import styles from "./styles.css";
 
 //For header
 import Header2 from "../components/Header/Header2";
-import theme from "../components/Header/Theme";
+import theme from "../Theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,9 +94,9 @@ export default function CreateAnOven() {
                 }}
               >
                 <option aria-label='None' value='' />
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
+                <option value={10}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
+                <option value={20}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
+                <option value={30}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
               </Select>
             </FormControl>
 
