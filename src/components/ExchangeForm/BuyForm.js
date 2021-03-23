@@ -104,7 +104,7 @@ export default function BuyForm() {
   // }
   const classes = useStyles();
   const [output, setOutput] = useState("0");
-  const [xtzValue, setXtzValue] = useState(0);
+  const [xtzAmount, setXtzAmount] = useState(0);
 
   // render() {
   return (
@@ -112,10 +112,11 @@ export default function BuyForm() {
       className='mb-3'
       onSubmit={(event) => {
         event.preventDefault();
-        let xtzAmount;
-        xtzAmount = this.input.value.toString();
-        xtzAmount = 0;
+        //let xtzAmount;
+        //xtzAmount = this.input.value.toString();
+        //xtzAmount = 0;
         //this.props.buyTokens(xtzAmount);
+        setXtzAmount(event.target.value);
       }}
     >
       <div>
@@ -133,12 +134,13 @@ export default function BuyForm() {
       <div className='input-group mb-4'>
         <input
           type='text'
-          onChange={(event) => {
-            const xtzAmount = this.input.value.toString();
-            this.setState({
-              output: xtzAmount * 100,
-            });
-          }}
+          onChange={() =>
+            // const xtzAmount = this.input.value.toString();
+            // this.setState({
+            //   output: xtzAmount * 100,
+            // });
+            setOutput(xtzAmount * 100)
+          }
           // ref={(input) => {
           //   this.input = input;
           // }}
@@ -170,7 +172,7 @@ export default function BuyForm() {
           type='text'
           className='form-control form-control-lg'
           placeholder='0'
-          //value={this.state.output}
+          value={output}
           disabled
         />
         <div className='input-group-append'>
