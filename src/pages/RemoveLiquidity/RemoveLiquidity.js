@@ -17,6 +17,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 
 //CSS
 //import "./styles.css";
+import "../buttonStyles.css";
 
 //For header
 import Header2 from "../../components/Header/Header2";
@@ -149,7 +150,7 @@ export default function CreateAnOven() {
             placeItems: "center",
             height: "20vh",
             padding: "15%",
-            marginTop: "-63vh",
+            marginTop: "-75vh",
             width: "60%",
             color: "#fff",
           }}
@@ -345,6 +346,22 @@ export default function CreateAnOven() {
                 textDecoration: "none",
               }}
             />
+            <a
+              href='#'
+              class='btn btn-sm animated-button victoria-one'
+              style={{
+                width: "90%",
+                background: "rgba(255, 255, 255, 0.2)",
+                border: "none",
+                border: "1px solid rgba(255, 255, 255, 0.5)",
+                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: "2px",
+                fontSize: "16px",
+              }}
+            >
+              Sign up
+            </a>
           </div>
         </div>
       </div>
