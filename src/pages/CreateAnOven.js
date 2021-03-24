@@ -14,13 +14,18 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
+import SearchIcon from "@material-ui/icons/Search";
 
 //CSS
 import "./styles.css";
 
+//Assets
+import tokenLogo from "../ctez.svg";
+import xtzLogo from "../tezos-xtz-logo.png";
 //For header
 import Header2 from "../components/Header/Header2";
 import theme from "../Theme";
+import { IconButton } from "@material-ui/core";
 // import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -84,6 +89,21 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+    width: "85%",
+    //background: "rgba(255, 255, 255, 0.2)",
+    background: "#fff",
+    border: "none",
+    outline: "none",
+    padding: "3px 7px",
+    borderRadius: "4px",
+    //border: "1px solid rgba(255, 255, 255, 0.5)",
+    //borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+    //borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+    fontSize: "16px",
+    color: "#000",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+    textDecoration: "none",
+    //marginBottom: "3%",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -101,16 +121,21 @@ const useStyles = makeStyles((theme) => ({
   formTitle: {
     position: "relative",
     color: "#fff",
-    fontSize: "30px",
+    fontSize: "25px",
     fontWeight: "700",
     letterSpacing: "1px",
     marginBottom: "20px",
   },
   formIPTitle: {
-    fontSize: "20px",
+    //fontSize: "20px",
     fontWeight: "500",
     letterSpacing: "1px",
     marginBottom: "20px",
+    color: "#fff",
+    float: "left",
+    marginLeft: "8%",
+    marginBottom: "5px",
+    fontSize: "15px",
   },
 }));
 
@@ -147,52 +172,23 @@ export default function CreateAnOven() {
           style={{
             display: "grid",
             placeItems: "center",
-            height: "110vh",
+            height: "130vh",
             padding: "15%",
             marginTop: "7vh",
-            width: "80%",
+            width: "65%",
           }}
         >
-          <div className={classes.glass} style={{ padding: "40px" }}>
-            <div className='box'>
-              <div className='square'></div>
-              <div className='square'></div>
-              <div className='square'></div>
-            </div>
+          <div className={classes.glass} style={{ padding: "7%" }}>
             <h2 className={classes.formTitle} style={{ marginTop: "-10px" }}>
               Create an oven
             </h2>
-            <text
-              className={classes.formIPTitle}
-              style={{
-                color: "#fff",
-                float: "left",
-                marginLeft: "4%",
-                //marginBottom: "12px",
-                marginBottom: "3px",
-              }}
-            >
-              Delegate
-            </text>
+            <text className={classes.formIPTitle}>Delegate</text>
             <FormControl
               fullWidth
               //variant='filled'
               className={classes.formControl}
               disableUnderline={true}
-              style={{
-                width: "90%",
-                background: "rgba(255, 255, 255, 0.2)",
-                border: "none",
-                outline: "none",
-                padding: "7px 15px",
-                borderRadius: "12px",
-                border: "1px solid rgba(255, 255, 255, 0.5)",
-                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                fontSize: "16px",
-                color: "#000",
-                boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
-              }}
+              style={{ marginTop: "-1px", marginBottom: "5%" }}
             >
               <Select
                 disableUnderline={true}
@@ -202,7 +198,7 @@ export default function CreateAnOven() {
                 onChange={handleChange}
                 style={{
                   background: "rgba(255, 255, 255, 0.0)",
-                  color: "#fff",
+                  color: "#000",
                 }}
                 placeholder='Delegate'
               >
@@ -212,18 +208,9 @@ export default function CreateAnOven() {
                 <option value={30}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
               </Select>
             </FormControl>
-            <text
-              className={classes.formIPTitle}
-              style={{
-                color: "#fff",
-                float: "left",
-                marginLeft: "4%",
-                marginBottom: "12px",
-              }}
-            >
-              Initial deposit (in XTZ)
-            </text>
+            <text className={classes.formIPTitle}>Initial deposit</text>
             <TextField
+              className={classes.formControl}
               fullWidth
               disableUnderline={true}
               id='standard-number'
@@ -232,56 +219,63 @@ export default function CreateAnOven() {
               InputLabelProps={{
                 shrink: true,
               }}
-              InputProps={{ disableUnderline: true }}
-              style={{
-                width: "90%",
-                background: "rgba(255, 255, 255, 0.2)",
-                border: "none",
-                outline: "none",
-                padding: "7px 15px",
-                borderRadius: "12px",
-                border: "1px solid rgba(255, 255, 255, 0.5)",
-                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                fontSize: "16px",
-                color: "#000",
-                boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
-                textDecoration: "none",
+              style={{ marginBottom: "5%", marginTop: "-1px" }}
+              //InputProps={{ disableUnderline: true }}
+
+              InputProps={{
+                disableUnderline: true,
+                endAdornment: (
+                  <InputAdornment>
+                    <IconButton>
+                      <img src={xtzLogo} height='19' alt='' />
+                    </IconButton>
+                  </InputAdornment>
+                ),
               }}
             />
-            <text
-              className={classes.formIPTitle}
-              style={{
-                color: "#fff",
-                float: "left",
-                marginLeft: "4%",
-                marginBottom: "12px",
-              }}
+            <text className={classes.formIPTitle}>Who can deposit</text>
+            <FormControl
+              fullWidth
+              //variant='filled'
+              className={classes.formControl}
+              disableUnderline={true}
+              style={{ marginTop: "-1px", marginBottom: "5%" }}
             >
-              Authorized depositors
-            </text>
+              <Select
+                disableUnderline={true}
+                labelId='demo-simple-select-filled-label'
+                id='demo-simple-select-filled'
+                //value={age}
+                onChange={handleChange}
+                style={{
+                  background: "rgba(255, 255, 255, 0.0)",
+                  color: "#000",
+                }}
+                //placeholder='Who can deposit'
+              >
+                <option aria-label='None' value='' />
+                <option value={10}>Whitelist</option>
+                <option value={20}>Everyone</option>
+              </Select>
+            </FormControl>
+            <text className={classes.formIPTitle}>Authorized depositors</text>
             <TextField
+              className={classes.formControl}
               required
               InputProps={{ disableUnderline: true }}
               id='standard-required'
               //label='Required'
               defaultValue=''
-              style={{
-                width: "90%",
-                background: "rgba(255, 255, 255, 0.2)",
-                border: "none",
-                outline: "none",
-                padding: "7px 15px",
-                borderRadius: "12px",
-                border: "1px solid rgba(255, 255, 255, 0.5)",
-                borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                fontSize: "16px",
-                color: "#000",
-                boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
-                textDecoration: "none",
-              }}
+              style={{ marginTop: "-1px", marginBottom: "5%" }}
             />
+            <button
+              type='submit'
+              id='swap-btn'
+              className='btn btn-primary btn-block btn-lg'
+              style={{ width: "85%", marginTop: "10%", marginLeft: "7.5%" }}
+            >
+              SWAP!
+            </button>
           </div>
         </div>
       </div>
