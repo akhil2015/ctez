@@ -28,6 +28,14 @@ import theme from "../../Theme";
 import { IconButton } from "@material-ui/core";
 // import { MenuItem } from "@material-ui/core";
 
+//ConseilJS
+import {
+  unlockFundraiser,
+  getAccountDetails,
+  getRevealResults,
+} from "../../utils/conseilUtils";
+import { getInitIdentity } from "../../utils/general";
+
 const useStyles = makeStyles((theme) => ({
   underline: {
     "&&&:before": {
@@ -154,6 +162,82 @@ export default function AddLiquidity() {
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
+
+  //ConseilJS
+  const [conseilState, setConseilState] = React.useState({
+    mnemonic: "",
+    password: "",
+    pkh: "",
+    email: "",
+    secret: "",
+    isUnlocked: false,
+    onInputChange: "",
+    error: "",
+  });
+
+  const isActivated = async (pkh) => {
+    try {
+      const queryResults = await getAccountDetails(pkh);
+      const account = queryResults[0];
+      return account.account_id === pkh;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const isRevealed = async (keyStore) => {
+    try {
+      const queryResults = await getRevealResults(keyStore);
+      return queryResults;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const setActiveTab = (isActive, isRevealed, newIdentity) => {
+    let tabInfo = {
+      activeTab: 0,
+      activatedTabsCount: 1,
+    };
+
+    if (!isActive) {
+      tabInfo.activeTab = 0;
+      tabInfo.activatedTabsCount = 1;
+    } else if (!isRevealed) {
+      tabInfo.activeTab = 1;
+      tabInfo.activatedTabsCount = 2;
+      newIdentity.active = true;
+    } else {
+      tabInfo.activeTab = 2;
+      tabInfo.activatedTabsCount = 3;
+      newIdentity.active = true;
+      newIdentity.reveal = true;
+    }
+
+    return [tabInfo, newIdentity];
+  };
+
+  const handelSubmit = async (event) => {
+    event.preventDefault();
+    setConseilState({ error: "" });
+    const { mnemonic, password, pkh, email, secret } = conseilState;
+
+    const keyStore = await unlockFundraiser(mnemonic, email, password, pkh);
+
+    if (!keyStore.error) {
+      setConseilState({ isUnlocked: true });
+      const initIdentity = getInitIdentity();
+      const newIdentity = { ...initIdentity, ...keyStore };
+      const isActive = await isActivated(keyStore.publicKeyHash);
+      const isRevealed = await isRevealed(keyStore);
+      const activeTabResults = setActiveTab(isActive, isRevealed, newIdentity);
+      const activeTab = activeTabResults[0].activeTab;
+      const activeTabsCount = activeTabResults[0].activeTabResults;
+      newIdentity = activeTabResults[1];
+    } else {
+      setConseilState({ error: keyStore.error });
+    }
+  };
 
   const handleChange = (event) => {
     const name = event.target.name;
