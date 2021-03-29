@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     flexGrow: 1,
-    backgroundImage: "linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9)",
+    backgroundImage: "linear-gradient(to left, #FFFFFF, #673AB7)",
     position: "absolute",
     display: "flex",
     justifyContent: "center",

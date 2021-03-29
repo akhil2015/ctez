@@ -1,7 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const arcBlue = "#0039A6";
-const arcOrange = "#FFBA60";
+const arcBlue = "#512DA8";
+const arcOrange = "#FF4081";
 const arcGrey = "#868686";
 
 export default createMuiTheme({
@@ -19,7 +19,7 @@ export default createMuiTheme({
   },
   typography: {
     tab: {
-      fontFamily: "Raleway",
+      fontFamily: 'Lato',
       textTransform: "none",
       fontWeight: 700,
       color: "white",
