@@ -29,12 +29,12 @@ import { IconButton } from "@material-ui/core";
 // import { MenuItem } from "@material-ui/core";
 
 //ConseilJS
-import {
-  unlockFundraiser,
-  getAccountDetails,
-  getRevealResults,
-} from "../../utils/conseilUtils";
-import { getInitIdentity } from "../../utils/general";
+// import {
+//   unlockFundraiser,
+//   getAccountDetails,
+//   getRevealResults,
+// } from "../../utils/conseilUtils";
+// import { getInitIdentity } from "../../utils/general";
 
 const useStyles = makeStyles((theme) => ({
   underline: {
@@ -164,35 +164,35 @@ export default function AddLiquidity() {
   const [value, setValue] = useState(0);
 
   //ConseilJS
-  const [conseilState, setConseilState] = React.useState({
-    mnemonic: "",
-    password: "",
-    pkh: "",
-    email: "",
-    secret: "",
-    isUnlocked: false,
-    onInputChange: "",
-    error: "",
-  });
+  // const [conseilState, setConseilState] = React.useState({
+  //   mnemonic: "",
+  //   password: "",
+  //   pkh: "",
+  //   email: "",
+  //   secret: "",
+  //   isUnlocked: false,
+  //   onInputChange: "",
+  //   error: "",
+  // });
 
-  const isActivated = async (pkh) => {
-    try {
-      const queryResults = await getAccountDetails(pkh);
-      const account = queryResults[0];
-      return account.account_id === pkh;
-    } catch (err) {
-      return false;
-    }
-  };
+  // const isActivated = async (pkh) => {
+  //   try {
+  //     const queryResults = await getAccountDetails(pkh);
+  //     const account = queryResults[0];
+  //     return account.account_id === pkh;
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // };
 
-  const isRevealed = async (keyStore) => {
-    try {
-      const queryResults = await getRevealResults(keyStore);
-      return queryResults;
-    } catch (err) {
-      return false;
-    }
-  };
+  // const isRevealed = async (keyStore) => {
+  //   try {
+  //     const queryResults = await getRevealResults(keyStore);
+  //     return queryResults;
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // };
 
   const setActiveTab = (isActive, isRevealed, newIdentity) => {
     let tabInfo = {
@@ -217,27 +217,27 @@ export default function AddLiquidity() {
     return [tabInfo, newIdentity];
   };
 
-  const handelSubmit = async (event) => {
-    event.preventDefault();
-    setConseilState({ error: "" });
-    const { mnemonic, password, pkh, email, secret } = conseilState;
+  // const handelSubmit = async (event) => {
+  //   event.preventDefault();
+  //   setConseilState({ error: "" });
+  //   const { mnemonic, password, pkh, email, secret } = conseilState;
 
-    const keyStore = await unlockFundraiser(mnemonic, email, password, pkh);
+  //   const keyStore = await unlockFundraiser(mnemonic, email, password, pkh);
 
-    if (!keyStore.error) {
-      setConseilState({ isUnlocked: true });
-      const initIdentity = getInitIdentity();
-      const newIdentity = { ...initIdentity, ...keyStore };
-      const isActive = await isActivated(keyStore.publicKeyHash);
-      const isRevealed = await isRevealed(keyStore);
-      const activeTabResults = setActiveTab(isActive, isRevealed, newIdentity);
-      const activeTab = activeTabResults[0].activeTab;
-      const activeTabsCount = activeTabResults[0].activeTabResults;
-      newIdentity = activeTabResults[1];
-    } else {
-      setConseilState({ error: keyStore.error });
-    }
-  };
+  //   if (!keyStore.error) {
+  //     setConseilState({ isUnlocked: true });
+  //     const initIdentity = getInitIdentity();
+  //     const newIdentity = { ...initIdentity, ...keyStore };
+  //     const isActive = await isActivated(keyStore.publicKeyHash);
+  //     const isRevealed = await isRevealed(keyStore);
+  //     const activeTabResults = setActiveTab(isActive, isRevealed, newIdentity);
+  //     const activeTab = activeTabResults[0].activeTab;
+  //     const activeTabsCount = activeTabResults[0].activeTabResults;
+  //     newIdentity = activeTabResults[1];
+  //   } else {
+  //     setConseilState({ error: keyStore.error });
+  //   }
+  // };
 
   const handleChange = (event) => {
     const name = event.target.name;
