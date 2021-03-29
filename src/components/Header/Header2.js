@@ -17,13 +17,11 @@ import MenuIcon from "@material-ui/icons/Menu";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-
 //import logo from "../../assets/logo.svg";
 import logo from "./TezosLogo.png";
-
+import { useWallet } from '../../contexts/WalletProvider'
 function ElevationScroll(props) {
   const { children } = props;
-
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
@@ -131,7 +129,7 @@ export default function Header(props) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-
+  const wallet = useWallet()
   const handleChange = (e, newValue) => {
     props.setValue(newValue);
   };
@@ -236,11 +234,14 @@ export default function Header(props) {
       </Tabs>
       <Button
         component={Link}
-        to='/connect'
         variant='contained'
         color='secondary'
         className={classes.button}
-        onClick={() => props.setValue(5)}
+        onClick={async () => {
+          console.log("Connecting Wallet");
+          wallet.connect()
+          props.setValue(5);
+        }}
       >
         Connect Wallet
       </Button>
