@@ -124,7 +124,7 @@ export default function Header(props) {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -184,7 +184,7 @@ export default function Header(props) {
     // },
     { name: "My ovens", link: "/my-ovens", activeIndex: 1 },
     { name: "Exchange", link: "/exchange", activeIndex: 2 },
-    { name: "Create an oven", link: "/create-an-oven", activeIndex: 3 },
+    { name: "Create an oven", link: "/create", activeIndex: 3 },
     //{ name: "Contact Us", link: "/contact", activeIndex: 4 },
   ];
 

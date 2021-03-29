@@ -24,7 +24,7 @@ const headersData = [
   },
   {
     label: "Create an oven",
-    href: "/create-an-oven",
+    href: "/create",
   },
   {
     label: "Connect wallet",
@@ -147,7 +147,7 @@ export default function Header() {
   };
 
   const CTezLogo = (
-    <Typography variant="h6" component="h1" className={logo}>
+    <Typography variant='h6' component='h1' className={logo}>
       CTez
     </Typography>
   );

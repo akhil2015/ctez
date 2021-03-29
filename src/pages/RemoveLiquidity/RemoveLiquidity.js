@@ -14,17 +14,17 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
-import SearchIcon from "@material-ui/icons/Search";
 
 //CSS
-import "./styles.css";
+//import "./styles.css";
 
 //Assets
-import tokenLogo from "../ctez.svg";
-import xtzLogo from "../tezos-xtz-logo.png";
+import tokenLogo from "../../ctez.svg";
+import xtzLogo from "../../tezos-xtz-logo.png";
+
 //For header
-import Header2 from "../components/Header/Header2";
-import theme from "../Theme";
+import Header2 from "../../components/Header/Header2";
+import theme from "../../Theme";
 import { IconButton } from "@material-ui/core";
 // import { MenuItem } from "@material-ui/core";
 
@@ -89,21 +89,6 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    width: "85%",
-    //background: "rgba(255, 255, 255, 0.2)",
-    background: "#fff",
-    border: "none",
-    outline: "none",
-    padding: "3px 7px",
-    borderRadius: "4px",
-    //border: "1px solid rgba(255, 255, 255, 0.5)",
-    //borderRight: "1px solid rgba(255, 255, 255, 0.2)",
-    //borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-    fontSize: "16px",
-    color: "#000",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
-    textDecoration: "none",
-    //marginBottom: "3%",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -137,9 +122,28 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
     fontSize: "15px",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    width: "85%",
+    //background: "rgba(255, 255, 255, 0.2)",
+    background: "#fff",
+    border: "none",
+    outline: "none",
+    padding: "3px 7px",
+    borderRadius: "4px",
+    //border: "1px solid rgba(255, 255, 255, 0.5)",
+    //borderRight: "1px solid rgba(255, 255, 255, 0.2)",
+    //borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+    fontSize: "16px",
+    color: "#000",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+    textDecoration: "none",
+    //marginBottom: "3%",
+  },
 }));
 
-export default function CreateAnOven() {
+export default function RemoveLiquidity() {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -172,7 +176,7 @@ export default function CreateAnOven() {
           style={{
             display: "grid",
             placeItems: "center",
-            height: "130vh",
+            height: "140vh",
             padding: "15%",
             marginTop: "7vh",
             width: "65%",
@@ -180,37 +184,21 @@ export default function CreateAnOven() {
         >
           <div className={classes.glass} style={{ padding: "7%" }}>
             <h2 className={classes.formTitle} style={{ marginTop: "-10px" }}>
-              Create an oven
+              Add Liquidity
             </h2>
-            <text className={classes.formIPTitle}>Delegate</text>
-            <FormControl
-              fullWidth
-              //variant='filled'
-              className={classes.formControl}
-              disableUnderline={true}
-              style={{ marginTop: "-1px", marginBottom: "5%" }}
-            >
-              <Select
-                disableUnderline={true}
-                labelId='demo-simple-select-filled-label'
-                id='demo-simple-select-filled'
-                //value={age}
-                onChange={handleChange}
-                style={{
-                  background: "rgba(255, 255, 255, 0.0)",
-                  color: "#000",
-                }}
-                placeholder='Delegate'
-              >
-                <option aria-label='None' value='' />
-                <option value={10}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
-                <option value={20}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
-                <option value={30}>tz1iQZLGfrEJMvqoxGPTxLNgzyW1B5x4XSdr</option>
-              </Select>
-            </FormControl>
-            <text className={classes.formIPTitle}>Initial deposit</text>
+            <text className={classes.formIPTitle}>To</text>
             <TextField
+              required
+              InputProps={{ disableUnderline: true }}
+              id='standard-required'
+              //label='Required'
+              defaultValue=''
               className={classes.formControl}
+              style={{ marginTop: "-1px", marginBottom: "5%" }}
+            />
+
+            <text className={classes.formIPTitle}>Withdraw</text>
+            <TextField
               fullWidth
               disableUnderline={true}
               id='standard-number'
@@ -219,9 +207,30 @@ export default function CreateAnOven() {
               InputLabelProps={{
                 shrink: true,
               }}
-              style={{ marginBottom: "5%", marginTop: "-1px" }}
               //InputProps={{ disableUnderline: true }}
-
+              className={classes.formControl}
+              style={{ marginTop: "-1px", marginBottom: "5%" }}
+              InputProps={{
+                disableUnderline: true,
+                endAdornment: (
+                  <InputAdornment>
+                    <IconButton>
+                      <img src={tokenLogo} height='19' alt='' />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <text className={classes.formIPTitle}>Withdraw</text>
+            <TextField
+              fullWidth
+              disableUnderline={true}
+              id='standard-number'
+              //label='Number'
+              type='number'
+              InputLabelProps={{
+                shrink: true,
+              }}
               InputProps={{
                 disableUnderline: true,
                 endAdornment: (
@@ -232,40 +241,40 @@ export default function CreateAnOven() {
                   </InputAdornment>
                 ),
               }}
-            />
-            <text className={classes.formIPTitle}>Who can deposit</text>
-            <FormControl
-              fullWidth
-              //variant='filled'
+              //InputProps={{ disableUnderline: true }}
               className={classes.formControl}
-              disableUnderline={true}
               style={{ marginTop: "-1px", marginBottom: "5%" }}
-            >
-              <Select
-                disableUnderline={true}
-                labelId='demo-simple-select-filled-label'
-                id='demo-simple-select-filled'
-                //value={age}
-                onChange={handleChange}
-                style={{
-                  background: "rgba(255, 255, 255, 0.0)",
-                  color: "#000",
-                }}
-                //placeholder='Who can deposit'
-              >
-                <option aria-label='None' value='' />
-                <option value={10}>Whitelist</option>
-                <option value={20}>Everyone</option>
-              </Select>
-            </FormControl>
-            <text className={classes.formIPTitle}>Authorized depositors</text>
+            />
+            <text className={classes.formIPTitle}>LQT to burn</text>
             <TextField
-              className={classes.formControl}
-              required
+              fullWidth
+              disableUnderline={true}
+              id='standard-number'
+              //label='Number'
+              type='number'
+              InputLabelProps={{
+                shrink: true,
+              }}
               InputProps={{ disableUnderline: true }}
-              id='standard-required'
-              //label='Required'
-              defaultValue=''
+              className={classes.formControl}
+              style={{ marginTop: "-1px", marginBottom: "5%" }}
+            />
+
+            <text className={classes.formIPTitle}>Deadline</text>
+
+            <TextField
+              id='datetime-local'
+              //label='Next appointment'
+              type='datetime-local'
+              defaultValue='2017-05-24T10:30'
+              className={classes.textField}
+              //   InputLabelProps={{
+              //     shrink: true,
+              //     disableUnderline: true,
+              //   }}
+              InputProps={{ disableUnderline: true }}
+              disableUnderline={true}
+              className={classes.formControl}
               style={{ marginTop: "-1px", marginBottom: "5%" }}
             />
             <button
