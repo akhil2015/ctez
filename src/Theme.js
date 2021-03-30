@@ -19,11 +19,15 @@ export default createMuiTheme({
   },
   typography: {
     tab: {
-      fontFamily: 'Lato',
+      fontFamily: "Lato",
       textTransform: "none",
       fontWeight: 700,
       color: "white",
       fontSize: "1rem",
+      "&:hover": {
+        //backgroundColor: "red",
+        color: arcOrange,
+      },
     },
     estimate: {
       fontFamily: "Pacifico",

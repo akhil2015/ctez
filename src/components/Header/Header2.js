@@ -19,7 +19,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 //import logo from "../../assets/logo.svg";
 import logo from "./TezosLogo.png";
-import { useWallet } from '../../contexts/WalletProvider'
+import { useWallet } from "../../contexts/WalletProvider";
+import { Divider } from "@material-ui/core";
 function ElevationScroll(props) {
   const { children } = props;
   const trigger = useScrollTrigger({
@@ -75,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     height: "45px",
     "&:hover": {
       backgroundColor: theme.palette.secondary.light,
+      color: "white",
     },
   },
   menu: {
@@ -129,7 +131,8 @@ export default function Header(props) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-  const wallet = useWallet()
+  const wallet = useWallet();
+  //wallet.status==="connected"
   const handleChange = (e, newValue) => {
     props.setValue(newValue);
   };
@@ -229,22 +232,46 @@ export default function Header(props) {
             aria-owns={route.ariaOwns}
             aria-haspopup={route.ariaPopup}
             onMouseOver={route.mouseOver}
+            style={{
+              textDecoration: "none",
+            }}
           />
         ))}
       </Tabs>
-      <Button
-        component={Link}
-        variant='contained'
-        color='secondary'
-        className={classes.button}
-        onClick={async () => {
-          console.log("Connecting Wallet");
-          wallet.connect()
-          props.setValue(5);
-        }}
-      >
-        Connect Wallet
-      </Button>
+
+      {wallet.status === "connected" ? (
+        <>
+          <Divider orientation='vertical' flexItem />
+          <Tab
+            //key={`${route}${index}`}
+            className={classes.tab}
+            //component={Link}
+            //to={route.link}
+            label='Connected'
+            //aria-owns={route.ariaOwns}
+            //aria-haspopup={route.ariaPopup}
+            // onMouseOver={route.mouseOver}
+            style={{
+              textDecoration: "none",
+              color: "#39FF14",
+            }}
+          />
+        </>
+      ) : (
+        <Button
+          component={Link}
+          variant='contained'
+          color='secondary'
+          className={classes.button}
+          onClick={async () => {
+            console.log("Connecting Wallet");
+            wallet.connect();
+            props.setValue(5);
+          }}
+        >
+          Connect Wallet
+        </Button>
+      )}
       <Menu
         id='simple-menu'
         anchorEl={anchorEl}
