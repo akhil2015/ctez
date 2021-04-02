@@ -77,7 +77,7 @@ function UseWalletProvider({
             const Tezos = new TezosToolkit("https://testnet-tezos.giganode.io/");
             if(tzAddress!=null){
               const bal = await Tezos.tz.getBalance(tzAddress);
-              let balString = bal.toString
+              let balString = bal.toString()
               balString = move_decimal(balString,-6)
               setBalance(balString)
             }
