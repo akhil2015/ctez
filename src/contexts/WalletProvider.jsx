@@ -9,6 +9,7 @@ import {
 
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { TezosToolkit } from "@taquito/taquito";
+import * as move_decimal from'move-decimal-point';
 
 const UseWalletContext = React.createContext(null)
 
@@ -41,11 +42,19 @@ function UseWalletProvider({
     const [error, setError] = useState(null)
     const [status, setStatus] = useState('disconnected')
     const [tzAddress, settzAddress] = useState(null)
+    const [balance,setBalance] = useState(0)
     const [proxyContract, setProxyContract] = useState(null);
     const [nftContract, setNftContract] = useState(null);
     const [tezos, setTezos] = useState(null);
     const network = "edonet"
-
+    // const updateBalance = async () =>{
+    //   const Tezos = new TezosToolkit("https://testnet-tezos.giganode.io/");
+    //   if(tzAddress!=null){
+    //     const balance = await Tezos.tz.getBalance(tzAddress);
+    //     return balance
+    //   }
+    //   return 
+    // }
     const connect = useCallback(
       async () => {
           try {
@@ -66,6 +75,12 @@ function UseWalletProvider({
             settzAddress(tzAddress);
 
             const Tezos = new TezosToolkit("https://testnet-tezos.giganode.io/");
+            if(tzAddress!=null){
+              const bal = await Tezos.tz.getBalance(tzAddress);
+              let balString = bal.toString
+              balString = move_decimal(balString,-6)
+              setBalance(balString)
+            }
             // Get contract
             Tezos.setWalletProvider(beaconWallet);
             setTezos(Tezos);
@@ -87,6 +102,7 @@ function UseWalletProvider({
         connect,
         tezos,
         tzAddress,
+        balance,
         proxyContract,
         nftContract,
         error,
@@ -96,6 +112,7 @@ function UseWalletProvider({
         connect,
         tezos,
         tzAddress,
+        balance,
         proxyContract,
         nftContract,
         error,

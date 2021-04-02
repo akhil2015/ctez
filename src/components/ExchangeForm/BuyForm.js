@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { useState } from "react";
 import tokenLogo from "../../ctez.svg";
 import xtzLogo from "../../tezos-xtz-logo.png";
+import { useWallet } from "../../contexts/WalletProvider";
+import { Wallpaper } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   underline: {
@@ -105,7 +107,7 @@ export default function BuyForm() {
   const classes = useStyles();
   const [output, setOutput] = useState("0");
   const [xtzAmount, setXtzAmount] = useState(0);
-
+  const wallet = useWallet()
   // render() {
   return (
     <form
@@ -128,7 +130,7 @@ export default function BuyForm() {
           style={{ color: "#fff", fontWeight: "bold" }}
         >
           Balance:
-          {/* TODO add balance fetch */}
+          {wallet.balance}
         </span>
       </div>
       <div className='input-group mb-4'>
