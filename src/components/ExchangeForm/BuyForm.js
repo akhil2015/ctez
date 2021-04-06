@@ -105,9 +105,9 @@ export default function BuyForm() {
   //   }
   // }
   const classes = useStyles();
-  const [output, setOutput] = useState("0");
+  const [output, setOutput] = useState(0);
   const [xtzAmount, setXtzAmount] = useState(0);
-  const wallet = useWallet()
+  const wallet = useWallet();
   // render() {
   return (
     <form
@@ -129,19 +129,19 @@ export default function BuyForm() {
           className='float-right'
           style={{ color: "#fff", fontWeight: "bold" }}
         >
-          Balance:
-          {wallet.balance}
+          Balance : {wallet.balance}
         </span>
       </div>
       <div className='input-group mb-4'>
         <input
           type='text'
-          onChange={() =>
+          onChange={(e) =>
             // const xtzAmount = this.input.value.toString();
             // this.setState({
             //   output: xtzAmount * 100,
             // });
-            setOutput(xtzAmount * 100)
+            //xtzAmount = e.target.value
+            setOutput(e.target.value * 100)
           }
           // ref={(input) => {
           //   this.input = input;
@@ -175,6 +175,7 @@ export default function BuyForm() {
           className='form-control form-control-lg'
           placeholder='0'
           value={output}
+          //value={xtzAmount * 100}
           disabled
         />
         <div className='input-group-append'>
