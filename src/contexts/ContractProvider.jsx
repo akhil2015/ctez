@@ -15,28 +15,28 @@ import { getLastOvenId, saveLastOven } from '../utils/ovenUtils';
 import { getTezosInstance } from './client';
 import { executeMethod, initContract } from './utils';
 
-let cTez: WalletContract;
+let cTez;
 
-export const initCTez = async (address: string): Promise<void> => {
+export const initCTez = async (address)  => {
   cTez = await initContract(address);
 };
 
-export const getCTez = (): WalletContract => {
+export const getCTez = () => {
   return cTez;
 };
 
-export const getCtezStorage = async (): Promise<CTezStorage> => {
-  const storage = await cTez.storage<CTezStorage>();
+export const getCtezStorage = async () => {
+  const storage = await cTez.storage();
   return storage;
 };
 
 export const create = async (
-  userAddress: string,
-  bakerAddress: string,
-  op: Depositor,
-  allowedDepositors?: string[],
+  userAddress,
+  bakerAddress,
+  op,
+  allowedDepositors,
   amount = 0,
-): Promise<string> => {
+)=> {
   const newOvenId = getLastOvenId(userAddress, cTez.address) + 1;
   const hash = await executeMethod(
     cTez,
@@ -49,18 +49,18 @@ export const create = async (
   return hash;
 };
 
-export const delegate = async (ovenAddress: string, bakerAddress: string): Promise<string> => {
+export const delegate = async (ovenAddress, bakerAddress)=> {
   const ovenContract = await initContract(ovenAddress);
   const hash = await executeMethod(ovenContract, 'oven_delegate', [bakerAddress]);
   return hash;
 };
 
 export const editDepositor = async (
-  ovenAddress: string,
-  ops: EditDepositorOps,
-  enable: boolean,
-  address?: string,
-): Promise<string> => {
+  ovenAddress,
+  ops,
+  enable,
+  address,
+) => {
   const ovenContract = await initContract(ovenAddress);
   const hash = await executeMethod(ovenContract, 'oven_edit_depositor', [
     ops,
@@ -70,13 +70,13 @@ export const editDepositor = async (
   return hash;
 };
 
-export const deposit = async (ovenAddress: string, amount: number): Promise<string> => {
+export const deposit = async (ovenAddress, amount)=> {
   const ovenContract = await initContract(ovenAddress);
   const hash = await executeMethod(ovenContract, 'default', undefined, 0, amount);
   return hash;
 };
 
-export const withdraw = async (ovenId: number, amount: number, to: string): Promise<string> => {
+export const withdraw = async (ovenId, amount, to) => {
   const hash = await executeMethod(cTez, 'withdraw', [
     ovenId,
     new BigNumber(amount).shiftedBy(6),
@@ -86,11 +86,11 @@ export const withdraw = async (ovenId: number, amount: number, to: string): Prom
 };
 
 export const liquidate = async (
-  ovenId: number,
-  overOwner: string,
-  amount: number,
-  to: string,
-): Promise<string> => {
+  ovenId,
+  overOwner,
+  amount,
+  to,
+) => {
   const hash = await executeMethod(cTez, 'liquidate', [
     ovenId,
     overOwner,
@@ -100,7 +100,7 @@ export const liquidate = async (
   return hash;
 };
 
-export const mintOrBurn = async (ovenId: number, quantity: number): Promise<string> => {
+export const mintOrBurn = async (ovenId, quantity) => {
   const hash = await executeMethod(cTez, 'mint_or_burn', [
     ovenId,
     new BigNumber(quantity).shiftedBy(6),
@@ -108,17 +108,17 @@ export const mintOrBurn = async (ovenId: number, quantity: number): Promise<stri
   return hash;
 };
 
-export const getOvenDelegate = async (userOven: Oven): Promise<string | null> => {
+export const getOvenDelegate = async (userOven) => {
   const tezos = getTezosInstance();
   const baker = await tezos.rpc.getDelegate(userOven.address);
   return baker;
 };
 
 export const prepareOvenCall = async (
-  storage: any,
-  ovenId: number,
-  userAddress: string,
-): Promise<Oven> => {
+  storage,
+  ovenId,
+  userAddress,
+) => {
   const userOven = await storage.ovens.get({
     id: ovenId,
     owner: userAddress,
@@ -127,14 +127,14 @@ export const prepareOvenCall = async (
   return { ...userOven, baker, ovenId };
 };
 
-export const getOvens = async (userAddress: string): Promise<Oven[] | undefined> => {
+export const getOvens = async (userAddress) => {
   try {
     if (!cTez && CTEZ_ADDRESS) {
       await initCTez(CTEZ_ADDRESS);
     }
     const lastOvenId = getLastOvenId(userAddress, cTez.address);
-    const storage: any = await cTez.storage();
-    const ovens: Promise<Oven>[] = [];
+    const storage = await cTez.storage();
+    const ovens= [];
     for (let i = lastOvenId; i > 0; i -= 1) {
       ovens.push(prepareOvenCall(storage, i, userAddress));
     }
@@ -145,13 +145,13 @@ export const getOvens = async (userAddress: string): Promise<Oven[] | undefined>
   }
 };
 
-export const getOvenDepositor = async (ovenAddress: string): Promise<depositors> => {
+export const getOvenDepositor = async (ovenAddress) => {
   const ovenContract = await initContract(ovenAddress);
-  const ovenStorage: oven = await ovenContract.storage();
+  const ovenStorage = await ovenContract.storage();
   return ovenStorage.depositors;
 };
 
-export const cTezError: ErrorType = {
+export const cTezError = {
   0: 'OVEN ALREADY EXISTS',
   1: 'OVEN CAN ONLY BE CALLED FROM MAIN CONTRACT',
   2: 'CTEZ FA12 ADDRESS ALREADY SET',
